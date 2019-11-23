@@ -7,7 +7,7 @@ The password generator allow user to generate random password that contain:
 - Uppercase characters
 User can determine the length of the password by entering the number between 8 to 128.
 The below is the application:
-![alt text](assets/images/screenshot)
+![screen shot](assets/images/screenshot.png)
 https://github.com/SherryJ-SK/Javascrip01.git
 
 
