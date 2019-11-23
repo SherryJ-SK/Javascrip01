@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Password Generator</title>
+
+    <!---- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!---- javascript --->
+    <script type="text/javascript">
+
+        // 1. Define pw conponents
+        var charTypes = {
+            'upper': 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+            'lower': 'abcdefghijklmnopqrstuvwxyz',
+            'number': '0123456789',
+            'special': '!$%^&*()-=+[]{};#:@~,./<>?'
+        }
+        var userChoise = " "
+
+        // 2. user to generate password
+
+        var userGeneratePw = confirm("Would you like to generate a random password?");
+        var numLength = prompt("How long you would like the password to be? (Please use any number between 8 to 128)");
+        console.log("Password length is " + numLength);
+        var passLength = parseInt(numLength);
+
+        // 3. specific charactors includes in the pw
+
+        if (passLength >= 8 && passLength <= 128) {
+
+            // add user choice into one string
+            var spacialCha = confirm("Do you want to include any Special charactor?");
+            if (spacialCha) {
+                userChoise += charTypes.special;
+            } else {
+                console.log(spacialCha);
+            }
+
+            var lowerCase = confirm("Do you want to include any lower case?");
+            if (lowerCase) {
+                userChoise += charTypes.lower;
+            } else {
+                console.log(lowerCase);
+            }
+
+            var upperCase = confirm("Do you want to include any upper case?");
+            if (upperCase) {
+                userChoise += charTypes.upper;
+            } else {
+                console.log(upperCase);
+            }
+
+            var numCha = confirm("Do you want to include any number?");
+            if (numCha) {
+                userChoise += charTypes.number;
+            } else {
+                console.log(numCha);
+            }
+
+            // generate random charactors from the user chose string
+            if (spacialCha && lowerCase && upperCase && numCha === false) {
+                alert("Please choose at least one charactor.")
+            } else {
+
+                var temp = Object.values(userChoise);
+                var allChars = '';
+                for (var j = 0; j < temp.length; j++) {
+                    allChars += temp[j]
+                }
+
+                var password = ''
+                for (var i = 0; i < passLength; i++) {
+                    var c = allChars[Math.floor(Math.random() * allChars.length)]
+                    password += c
+                }
+                alert("Your new password is " + password);
+            }
+        }
+
+        else {
+            alert("The number has to be between 8 and 128.");
+        }
+
+
+    </script>
+
+
+</head>
+
+<body style="background-color: #f2f2f2;">
+
+    <!--- header -->
+    <header class="text-center pt-1 pb-4">
+        <h1>Password Generator</h1>
+    </header>
+
+    <!--- pw generater -->
+    <div class="wrapper shadow" style="background-color: #ffffff;">
+        <div class="row">
+            <div class="col-md-12">
+                <form>
+                    <p class="title">Generate a Password</p>
+                    <hr>
+                    <div class="form-group">
+                        <textarea readonly id="password" placeholder="Your Secure Password"
+                            aria-label="Generated Password" style="width: 100%;"></textarea>
+                        <hr>
+                    </div>
+                    <div class="form-group d-flex">
+                        <button id="generate" type="button" class="btn btn-danger" onclick="generate">Generate
+                            Password</button>
+
+                        <button id="copy" type="button" class="btn btn-secondary ml-auto">
+                            Copy to Clipboard
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
